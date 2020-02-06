@@ -26,6 +26,33 @@ public class Wijn {
         this.inBestelling = inBestelling;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public int getJaar() {
+        return jaar;
+    }
+
+    public int getBeoordeling() {
+        return beoordeling;
+    }
+
+    public BigDecimal getPrijs() {
+        return prijs;
+    }
+
+    public long getInBestelling() {
+        return inBestelling;
+    }
+
+    public void verhoogBestelling(int aantal) {
+        if(aantal <= 0) {
+            throw new IllegalArgumentException();
+        }
+        inBestelling += aantal;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

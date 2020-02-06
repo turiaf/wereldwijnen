@@ -1,0 +1,1 @@
+insert into landen (naam) VALUES ('test')
