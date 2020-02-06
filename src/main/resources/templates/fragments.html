@@ -6,16 +6,14 @@
 </head>
 
 <nav th:fragment="menu" xmlns:th="http://www.thymeleaf.org">
-<!--    <style th:inline="css">-->
-<!--        .banner {-->
-<!--            background-image: url([[@{}]]);-->
-<!--        }-->
-<!--    </style>-->
-    <div class="banner"><!-- th:style="'background:url('@{/image/login-background.jpg}');'"-->
-        <div>Wereldwijnen</div>
+    <div class="banner" th:style="'background-image:url(' + @{/images/intro.jpg} + ');'">
+        <div><h1>Wereldwijnen</h1></div>
         <ul>
-            <li><a th:href="@{/}"><img th:src="@{/images/1.png}" alt="land1"></a></li>
+            <li th:each="land:${listLand}" th:object="${land}">
+                <a th:href="@{/soort/{id}(id= *{id})}">
+                    <img th:src="@{/images/{num}.png(num= *{id})}" th:alt="|land *{id}|"></a>
+            </li>
         </ul>
-        <div><img th:src="@{/images/mandje.png}"></div>
+<!--        <div><img th:src="@{/images/mandje.png}"></div>-->
     </div>
 </nav>

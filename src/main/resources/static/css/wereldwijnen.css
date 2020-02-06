@@ -5,19 +5,9 @@ body {
 }
 
 .banner {
-    background-image: url("");
-}
-
-.roze {
-    background-color: LightPink;
-}
-
-.blauw {
-    background-color: LightBlue;
-}
-
-.fullwidth {
-    width: 100%;
+    color: #FFFFD6;
+    text-align: center;
+    background-size: cover;
 }
 
 dd, dt {
@@ -82,7 +72,6 @@ input[type='checkbox'] {
 }
 
 nav ul {
-    background-color: red;
     padding: 0.4em 0;
 }
 
@@ -92,6 +81,12 @@ nav li {
 
 nav li a {
     color: white;
+    font-weight: bold;
+    padding-left: 0.5em;
+    text-decoration: none;
+    vertical-align: middle;
+}
+li a {
     font-weight: bold;
     padding-left: 0.5em;
     text-decoration: none;

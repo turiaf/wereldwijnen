@@ -1,6 +1,7 @@
 package be.vdab.wereldwijnen.domain;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -41,6 +42,10 @@ public class Soort {
 
     public boolean removeWijn(Wijn wijn) {
         return wijnen.remove(wijn);
+    }
+
+    public Set<Wijn> getWijnen() {
+        return Collections.unmodifiableSet(wijnen);
     }
 
     @Override

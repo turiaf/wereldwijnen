@@ -65,4 +65,6 @@ public class Wijn {
     public int hashCode() {
         return Objects.hash(jaar);
     }
+
+
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title= 'Soorten')"></head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<h2 th:if="${land != null}">Soorten uit <span th:text="${land.naam}"></span></h2>
+<div th:if="${land != null}">
+    <ul class="zebra">
+        <li th:each="soort:${land.soorten}" th:object="${soort}">
+            <a th:href="@{/wijn/{id}(id= *{id})}" th:text="*{naam}"></a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

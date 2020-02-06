@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title= 'Toevoegen')"></head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<h2 th:if="${wijn == null}">Wijn niet gevonden</h2>
+<h2 th:if="${wijn != null}">Wijn toevoegen aan mandje</h2>
+<p>Terug naar overzicht</p>
+<div th:if="${wijn != null}">
+    <table>
+        <thead>
+        <tr>
+            <th>Land</th>
+            <th>Soort</th>
+            <th>Jaar</th>
+            <th>Beoordeling</th>
+            <th>Prijs</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:object="${wijn}">
+            <td> A voir!!!!</td>
+            <td th:text="${id}"></td>
+            <td th:text="*{jaar}"></td>
+            <td><img th:src="@{/images/ster{num}.png(num= *{beoordeling})}"></td>
+            <td th:text="*{prijs}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<form method="post" th:action="@{/}">
+    <label>Aantal flessen<span></span><input></label>
+    <button>Toevoegen</button>
+</form>
+</body>
+</html>
