@@ -1,0 +1,21 @@
+<head th:fragment="head(title)" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+    <link rel="icon" th:href="@{/images/wereldwijnen.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/wereldwijnen.css}">
+</head>
+
+<nav th:fragment="menu" xmlns:th="http://www.thymeleaf.org">
+<!--    <style th:inline="css">-->
+<!--        .banner {-->
+<!--            background-image: url([[@{}]]);-->
+<!--        }-->
+<!--    </style>-->
+    <div class="banner"><!-- th:style="'background:url('@{/image/login-background.jpg}');'"-->
+        <div>Wereldwijnen</div>
+        <ul>
+            <li><a th:href="@{/}"><img th:src="@{/images/1.png}" alt="land1"></a></li>
+        </ul>
+        <div><img th:src="@{/images/mandje.png}"></div>
+    </div>
+</nav>

@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @Import(JpaBestelbonRepository.class)
 @Sql("/insertBestelbon.sql")
-@Sql("/insertBestelbonBestelbonlijn.sql")
+//@Sql("/insertBestelbonBestelbonlijn.sql")
 class JpaBestelbonRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
     private final JpaBestelbonRepository repository;
     private static String BESTELBONNEN = "bestelbonnen";
