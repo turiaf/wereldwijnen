@@ -1,38 +1,60 @@
 package be.vdab.wereldwijnen.controllers;
 
-import be.vdab.wereldwijnen.services.SoortService;
+import be.vdab.wereldwijnen.forms.WijnForm;
 import be.vdab.wereldwijnen.services.WijnService;
+import be.vdab.wereldwijnen.sessions.Mandje;
+import be.vdab.wereldwijnen.sessions.StateMandje;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("wijn")
 public class WijnController {
-    private final SoortService soortService;
     private final WijnService wijnService;
+    private final Mandje mandje;
+    private final StateMandje stateMandje;
 
-    public WijnController(SoortService soortService, WijnService wijnService) {
-        this.soortService = soortService;
+    public WijnController(WijnService wijnService, Mandje mandje, StateMandje stateMandje) {
         this.wijnService = wijnService;
-    }
-
-    @GetMapping("{id}")
-    public ModelAndView toonWijnen(@PathVariable long id) {
-        ModelAndView modelAndView = new ModelAndView("wijn");
-        soortService.findById(id).ifPresent(soort ->
-                modelAndView.addObject("soort", soort));
-        return modelAndView;
+        this.mandje = mandje;
+        this.stateMandje = stateMandje;
     }
 
     @GetMapping("toevoegen/{id}")
-    public ModelAndView toevoegen(@PathVariable long id) {
+    public ModelAndView toonFormToevoegen(@PathVariable long id) {
         ModelAndView modelAndView = new ModelAndView("toevoegen");
         wijnService.findById(id).ifPresent(wijn ->
                 modelAndView.addObject("wijn", wijn));
+        modelAndView.addObject("wijnForm", new WijnForm(null, null));
         return modelAndView;
+    }
+
+    @PostMapping("toevoegen")
+    public ModelAndView toevoegen(@Valid WijnForm wijnForm, Errors errors, @RequestParam("id") String idN) {
+        if(errors.hasErrors()) {
+            ModelAndView modelAndView = new ModelAndView("toevoegen");
+            try {
+                long id = Long.parseLong(idN);
+                wijnService.findById(id).ifPresent(wijn -> {
+                    modelAndView.addObject("wijn", wijn);
+                });
+            } catch (NumberFormatException ex) {
+                return new ModelAndView("fout");
+            }
+            return modelAndView;
+        }
+        wijnService.findById(wijnForm.getId()).ifPresent(wijn -> {
+            mandje.addWijn(wijnForm.getId(), wijnForm.getAantal());
+            mandje.verhoogTotaal(wijn.teBetalen(wijnForm.getAantal()));
+            if(mandje.isGevuld()) {
+                stateMandje.setGevuld(true);
+            }
+        });
+        return new ModelAndView("redirect:/");
     }
 
 }

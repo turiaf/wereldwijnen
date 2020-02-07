@@ -14,6 +14,9 @@ public class Wijn {
     private int beoordeling;
     private BigDecimal prijs;
     private long inBestelling;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "soortid")
+    private Soort soort;
     private long versie;
 
     protected Wijn() {
@@ -46,11 +49,19 @@ public class Wijn {
         return inBestelling;
     }
 
+    public Soort getSoort() {
+        return soort;
+    }
+
     public void verhoogBestelling(int aantal) {
         if(aantal <= 0) {
             throw new IllegalArgumentException();
         }
         inBestelling += aantal;
+    }
+
+    public BigDecimal teBetalen(int aantal) {
+        return prijs.multiply(BigDecimal.valueOf(aantal));
     }
 
     @Override

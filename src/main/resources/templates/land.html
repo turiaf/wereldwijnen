@@ -5,9 +5,9 @@
 <nav th:replace="fragments::menu"></nav>
 <h2 th:if="${land != null}">Soorten uit <span th:text="${land.naam}"></span></h2>
 <div th:if="${land != null}">
-    <ul class="zebra">
+    <ul class="toto">
         <li th:each="soort:${land.soorten}" th:object="${soort}">
-            <a th:href="@{/wijn/{id}(id= *{id})}" th:text="*{naam}"></a>
+            <a th:href="@{/soort/{id}(id= *{id})}" th:text="*{naam}"></a>
         </li>
     </ul>
 </div>

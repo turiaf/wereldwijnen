@@ -2,12 +2,17 @@ package be.vdab.wereldwijnen.repositories;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import be.vdab.wereldwijnen.domain.Land;
+import be.vdab.wereldwijnen.domain.Soort;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,7 +41,10 @@ class JpaLandRepositoryTest extends AbstractTransactionalJUnit4SpringContextTest
     @Test
     void findById() {
         long id = idVanTestLand();
-        assertThat(repository.findById(id).get().getNaam()).isEqualTo("test");
+        Land land = repository.findById(id).get();
+        assertThat(land.getNaam()).isEqualTo("test");
+//        Set<Soort> soorts = land.getSoorten();
+//        assertThat(soorts).extracting(soort -> soort.getNaam());
     }
 
     @Test

@@ -4,6 +4,16 @@
 <body>
 <script th:src="@{/js/preventDoubleSubmit.js}" defer></script>
 <nav th:replace="fragments::menu"></nav>
+
+<div th:if="${soort.land != null}">
+    <h2 th:text="${soort.land.naam}"></h2>
+    <ul class="toto">
+        <li th:each="soort:${soort.land.soorten}" th:object="${soort}">
+            <a th:href="@{/soort/{id}(id= *{id})}" th:text="*{naam}"></a>
+        </li>
+    </ul>
+</div>
+
 <h2 th:if="${soort != null}">Wijnen uit <span th:text="${soort.naam}"></span></h2>
 <div th:if="${soort != null}">
     <ul>

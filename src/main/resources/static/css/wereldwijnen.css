@@ -48,24 +48,29 @@ label span {
     margin-left: 0.5em;
 }
 
-label {
+div label {
     cursor: pointer;
 }
 
-input {
+div input {
     display: block;
     margin-top: 0.2em;
     margin-bottom: 1em;
     font-size: 1.1em;
+    width: 24em;
 }
+.zozo input{
+    display: inline;
+    margin-top: 0.2em;
+    margin-bottom: 1em;
+    width: auto;
+}
+
 
 input:focus, textarea:focus, select:focus {
     background-color: #FFFFD6
 }
 
-.zonderbolletjes {
-    list-style: none;
-}
 
 input[type='checkbox'] {
     display: inline;
@@ -93,29 +98,50 @@ li a {
     vertical-align: middle;
 }
 
-nav li a:hover {
-    color: #F7FFCC;
-}
-
-ul.zebra {
+ul.toto {
     list-style: none;
     padding: 0;
 }
 
-ul.zebra li {
+ul.toto li {
     padding-left: 0.5em;
     padding-bottom: 0.1em;
     padding-top: 0.1em;
+    display: inline;
+}
+table.toevoegenTable td{
+    padding-right: 10em;
+}
+table.toevoegenTable{
+    padding-right: 10em;
+    text-align: left;
 }
 
-ul.zebra li:nth-child(odd) {
-    background-color: #F2F2E4;
+table.mandjeTable {
+    margin-top: 2em;
 }
 
-ul.zebra li:nth-child(even) {
-    background-color: #E6E6C8;
+.mandjeTable tbody tr:nth-child(odd) {
+    background-color: lemonchiffon;
 }
 
-ul.zebra li:nth-child(odd):hover, ul.zebra li:nth-child(even):hover {
-    background-color: #ccff00;
+.mandjeTable tbody tr:nth-child(even) {
+    background-color: gainsboro;
 }
+
+.mandjeTable thead tr, tfoot tr {
+    background-color: khaki;
+    font-weight: bold;
+}
+.mandjeTable thead tr{
+    text-align: center;
+}
+
+.mandjeTable td {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+.mandjeTable tr{
+    text-align: right;
+}
+
