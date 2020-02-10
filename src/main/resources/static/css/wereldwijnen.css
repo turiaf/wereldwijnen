@@ -10,31 +10,8 @@ body {
     background-size: cover;
 }
 
-dd, dt {
-    margin-left: 0;
-}
-
-dt {
-    margin-top: 0.5em;
-}
-
-dd {
-    font-weight: bold;
-}
-
 label span, .fout {
     background-color: red;
-    border-bottom-right-radius: 0.5em;
-    border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
-    box-shadow: 5px 5px #777777;
-    margin-left: 0.5em;
-    padding: 0.5em;
-    color: white;
-}
-
-.boodschap {
-    background-color: green;
     border-bottom-right-radius: 0.5em;
     border-top-left-radius: 0.5em;
     border-top-right-radius: 0.5em;
@@ -72,7 +49,7 @@ input:focus, textarea:focus, select:focus {
 }
 
 
-input[type='checkbox'] {
+input[type='radio'] {
     display: inline;
 }
 

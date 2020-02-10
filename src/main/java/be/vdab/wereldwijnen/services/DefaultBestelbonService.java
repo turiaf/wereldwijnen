@@ -33,6 +33,9 @@ class DefaultBestelbonService implements BestelbonService {
     @Override
     @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
     public long bestelbonBevestigen(Map<Long, Integer> wijnen, Bestelbon bestelbon) {
+
+
+
         wijnen.entrySet().stream().forEach(entry -> {
             Optional<Wijn> optionalWijn = wijnRepository.findById(entry.getKey());
             if(optionalWijn.isPresent()) {
@@ -43,11 +46,6 @@ class DefaultBestelbonService implements BestelbonService {
             } else {
                 throw new WijnNietGevondenException();
             }
-            /*wijnRepository.findById(entry.getKey()).ifPresent(wijn -> {
-                wijn.verhoogBestelling(entry.getValue());
-                bestelbon.addBonLijn(new Bestelbonlijn(entry.getValue(),
-                        wijn.teBetalen(entry.getValue()), wijn));
-            });*/
         });
         repository.create(bestelbon);
         return bestelbon.getId();
