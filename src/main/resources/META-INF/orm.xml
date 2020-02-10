@@ -3,22 +3,16 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
                  http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd" version="2.1">
-    <named-query name="Land.findAll">
+    <named-query name="Land.findAllLandsId">
         <query>
-            select l from Land l
+            select l.id from Land l
             order by l.naam
         </query>
     </named-query>
-    <named-query name="Soort.findAll">
-        <query>
-            select s from Soort s
-            order by s.naam
-        </query>
-    </named-query>
-    <named-query name="Wijn.findAll">
+    <named-query name="Wijn.findAllInList">
         <query>
             select w from Wijn w
-            order by w.jaar
+            where w.id in :idSet
         </query>
     </named-query>
 </entity-mappings>

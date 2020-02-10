@@ -19,10 +19,7 @@ public class Bestelbon {
     private String huisNr;
     private String postCode;
     private String gemeente;
-//    enum
     private Bestelwijze bestelwijze;
-//    @OneToMany
-//    @JoinColumn(name = "bonid")
     @ElementCollection
     @CollectionTable(name = "bestelbonlijnen",
             joinColumns = @JoinColumn(name = "bonid"))
@@ -33,8 +30,8 @@ public class Bestelbon {
     protected Bestelbon() {
     }
 
-    public Bestelbon(LocalDateTime besteld ,String naam, String straat, String huisNr, String postCode, String gemeente, Bestelwijze bestelwijze) {
-        this.besteld = besteld;
+    public Bestelbon(String naam, String straat, String huisNr, String postCode, String gemeente, Bestelwijze bestelwijze) {
+        this.besteld = LocalDateTime.now();
         this.naam = naam;
         this.straat = straat;
         this.huisNr = huisNr;

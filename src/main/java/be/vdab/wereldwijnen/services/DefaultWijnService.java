@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
@@ -18,13 +19,20 @@ class DefaultWijnService implements WijnService {
         this.repository = repository;
     }
 
-    @Override
-    public List<Wijn> findAll() {
-        return repository.findAll();
-    }
+//    @Override
+//    public List<Wijn> findAll() {
+//        return repository.findAll();
+//    }
 
     @Override
     public Optional<Wijn> findById(long id) {
         return repository.findById(id);
     }
+
+    @Override
+    public List<Wijn> findAllInList(List<Long> idList) {
+        return repository.findAllInList(idList);
+    }
+
+
 }

@@ -41,7 +41,8 @@ class JpaSoortRepositoryTest extends AbstractTransactionalJUnit4SpringContextTes
 
     @Test
     void findById() {
-        assertThat(repository.findById(idVanTestSoort()).get().getNaam()).isEqualTo("test");
+        Soort soort1 = repository.findById(idVanTestSoort()).get();
+        assertThat(soort1.getNaam()).isEqualTo("test");
     }
 
     @Test
@@ -50,9 +51,22 @@ class JpaSoortRepositoryTest extends AbstractTransactionalJUnit4SpringContextTes
     }
 
     @Test
-    void findAll() {
-        assertThat(repository.findAll()).hasSize(super.countRowsInTable(SOORTEN))
-                .extracting(soort -> soort.getNaam())
-                .isSortedAccordingTo((n1, n2) -> n1.compareToIgnoreCase(n2));
+    void landLazyLoaded() {
+        Soort soort = repository.findById(idVanTestSoort()).get();
+        assertThat(soort.getLand().getNaam()).isEqualTo("test");
     }
+
+    @Test
+    void wijnenLazyLoaded() {
+        Soort soort = repository.findById(idVanTestSoort()).get();
+        assertThat(soort.getWijnen())
+                .extracting(wijn -> wijn.getJaar());
+    }
+
+    //    @Test
+//    void findAll() {
+//        assertThat(repository.findAll()).hasSize(super.countRowsInTable(SOORTEN))
+//                .extracting(soort -> soort.getNaam())
+//                .isSortedAccordingTo((n1, n2) -> n1.compareToIgnoreCase(n2));
+//    }
 }

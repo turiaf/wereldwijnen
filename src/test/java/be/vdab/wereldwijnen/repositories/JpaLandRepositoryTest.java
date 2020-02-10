@@ -27,12 +27,18 @@ class JpaLandRepositoryTest extends AbstractTransactionalJUnit4SpringContextTest
         this.repository = repository;
     }
 
+//    @Test
+//    void findAll() {
+//        assertThat(repository.findAll()).hasSize(super.countRowsInTable(LANDEN))
+//                .extracting(land1 -> land1.getNaam())
+//                .isSortedAccordingTo((n1, n2) -> n1.compareToIgnoreCase(n2));
+//    }
+
     @Test
-    void findAll() {
-        assertThat(repository.findAll()).hasSize(super.countRowsInTable(LANDEN))
-                .extracting(land -> land.getNaam())
-                .isSortedAccordingTo((n1, n2) -> n1.compareToIgnoreCase(n2));
+    void findAllLandsId() {
+        assertThat(repository.findAllLandsId()).hasSize(super.countRowsInTable(LANDEN));
     }
+
     private long idVanTestLand() {
         return super.jdbcTemplate.queryForObject(
                 "select id from landen where naam = 'test'", Long.class);
@@ -40,11 +46,15 @@ class JpaLandRepositoryTest extends AbstractTransactionalJUnit4SpringContextTest
 
     @Test
     void findById() {
-        long id = idVanTestLand();
-        Land land = repository.findById(id).get();
+        Land land = repository.findById(idVanTestLand()).get();
         assertThat(land.getNaam()).isEqualTo("test");
-//        Set<Soort> soorts = land.getSoorten();
-//        assertThat(soorts).extracting(soort -> soort.getNaam());
+    }
+
+    @Test
+    void soortenLazyLoaded() {
+        Land land = repository.findById(idVanTestLand()).get();
+        assertThat(land.getSoorten())
+                .extracting(soort -> soort.getNaam());
     }
 
     @Test

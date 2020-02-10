@@ -31,7 +31,7 @@ class JpaBestelbonRepositoryTest extends AbstractTransactionalJUnit4SpringContex
 
     @BeforeEach
     void beforeEach() {
-        bestelbon1 = new Bestelbon(LocalDateTime.now(), "test1", "test1", "test1", "test1",
+        bestelbon1 = new Bestelbon("test1", "test1", "test1", "test1",
                 "test1", Bestelwijze.AFHALEN);
     }
 

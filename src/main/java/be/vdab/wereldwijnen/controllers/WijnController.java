@@ -35,7 +35,7 @@ public class WijnController {
 
     @PostMapping("toevoegen")
     public ModelAndView toevoegen(@Valid WijnForm wijnForm, Errors errors, @RequestParam("id") String idN) {
-        if(errors.hasErrors()) {
+        if (errors.hasErrors()) {
             ModelAndView modelAndView = new ModelAndView("toevoegen");
             try {
                 long id = Long.parseLong(idN);
@@ -50,7 +50,7 @@ public class WijnController {
         wijnService.findById(wijnForm.getId()).ifPresent(wijn -> {
             mandje.addWijn(wijnForm.getId(), wijnForm.getAantal());
             mandje.verhoogTotaal(wijn.teBetalen(wijnForm.getAantal()));
-            if(mandje.isGevuld()) {
+            if (mandje.isGevuld()) {
                 stateMandje.setGevuld(true);
             }
         });

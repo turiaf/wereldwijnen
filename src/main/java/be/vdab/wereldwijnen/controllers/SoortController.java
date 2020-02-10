@@ -28,7 +28,4 @@ public class SoortController {
                 modelAndView.addObject("soort", soort));
         return modelAndView;
     }
-
-
-
 }

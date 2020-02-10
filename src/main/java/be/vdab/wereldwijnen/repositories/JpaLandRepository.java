@@ -15,10 +15,10 @@ class JpaLandRepository implements LandRepository {
         this.manager = manager;
     }
 
+
     @Override
-    public List<Land> findAll() {
-        return manager.createNamedQuery("Land.findAll", Land.class)
-//                check setHint
+    public List<Long> findAllLandsId() {
+        return manager.createNamedQuery("Land.findAllLandsId", Long.class)
                 .getResultList();
     }
 

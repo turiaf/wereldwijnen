@@ -18,10 +18,10 @@ class DefaultSoortService implements SoortService {
         this.repository = repository;
     }
 
-    @Override
-    public List<Soort> findAll() {
-        return repository.findAll();
-    }
+//    @Override
+//    public List<Soort> findAll() {
+//        return repository.findAll();
+//    }
 
     @Override
     public Optional<Soort> findById(long id) {

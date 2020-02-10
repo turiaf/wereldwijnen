@@ -10,22 +10,26 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LandTest {
-    private Land land1;
+    private Land land1, land2;
     private Soort soort1;
 
     @BeforeEach
     void beforeEach() {
         land1 = new Land("test");
         soort1 = new Soort("test", land1);
+        land2 = new Land("test2");
     }
     @Test
-    void eenNieuweLandHeeftGeenSoorten() {
-        assertThat(land1.getSoorten()).isEmpty();
-    }
-    @Test
-    void soortToevoegen() {
-        assertThat(land1.addSoort(soort1)).isTrue();
+    void land11IsDeLandVanSoort1() {
+        assertThat(soort1.getLand()).isEqualTo(land1);
         assertThat(land1.getSoorten()).containsOnly(soort1);
+    }
+    @Test
+    void soort1VerhuistNaarLand2() {
+        assertThat(land2.addSoort(soort1)).isTrue();
+        assertThat(land1.getSoorten()).isEmpty();
+        assertThat(land2.getSoorten()).containsOnly(soort1);
+        assertThat(soort1.getLand()).isEqualTo(land2);
     }
     @Test
     void tweeKeerDezelfdeSoortMislukt() {
@@ -33,21 +37,8 @@ class LandTest {
         assertThat(land1.addSoort(soort1)).isFalse();
         assertThat(land1.getSoorten()).containsOnly(soort1);
     }
-//    @Test
-//    void nullAlsSoortMislukt() {
-//        assertThatNullPointerException().isThrownBy(() -> land1.addSoort(null));
-//    }
-//    @Test
-//    void soortVerwijderen() {
-//        land1.addSoort(soort1);
-//        assertThat(land1.removeSoort(soort1)).isTrue();
-//        assertThat(land1.getSoorten()).isEmpty();
-//    }
-//    @Test
-//    void eenSoortVerwijderenDieJeNietToevoegdeMislukt() {
-//        land1.addSoort(soort1);
-//        Soort soort2 = new Soort("test2");
-//        assertThat(land1.removeSoort(soort2)).isFalse();
-//        assertThat(land1.getSoorten()).containsOnly(soort1);
-//    }
+    @Test
+    void eenNullSoortToevoegenMislukt() {
+        assertThatNullPointerException().isThrownBy(() -> land1.addSoort(null));
+    }
 }

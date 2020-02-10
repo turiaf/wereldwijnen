@@ -16,13 +16,6 @@ class JpaSoortRepository implements SoortRepository {
     }
 
     @Override
-    public List<Soort> findAll() {
-        return manager.createNamedQuery("Soort.findAll", Soort.class)
-//                check setHint
-                .getResultList();
-    }
-
-    @Override
     public Optional<Soort> findById(long id) {
         return Optional.ofNullable(manager.find(Soort.class, id));
     }

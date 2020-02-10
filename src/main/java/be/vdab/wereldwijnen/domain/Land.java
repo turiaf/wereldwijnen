@@ -7,12 +7,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "landen")
-@NamedEntityGraph(name = Land.MET_SOORTEN,
-        attributeNodes = @NamedAttributeNode("soorten"))
-//@NamedEntityGraph(name = "Land.metSoortenEnWijn",
-//        attributeNodes = @NamedAttributeNode(value = "soorten", subgraph = "metWijn"),
-//        subgraphs = @NamedSubgraph(name = "metWijn",
-//                attributeNodes = @NamedAttributeNode(value = "wijnen") ))
 public class Land {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +24,10 @@ public class Land {
 
     public Land(String naam) {
         this.naam = naam;
-//        this.soorten = new LinkedHashSet<>();
     }
 
     public boolean addSoort(Soort soort) {
-        boolean toevoegen = soorten.add(soort);
+        boolean toegevoegd = soorten.add(soort);
         Land oudeLand = soort.getLand();
         if(oudeLand != null && oudeLand != this) {
             oudeLand.soorten.remove(soort);
@@ -42,12 +35,8 @@ public class Land {
         if(oudeLand != this) {
             soort.setLand(this);
         }
-        return soorten.add(soort);
+        return toegevoegd;
     }
-
-//    public boolean removeSoort(Soort soort) {
-//        return soorten.remove(soort);
-//    }
 
     public long getId() {
         return id;

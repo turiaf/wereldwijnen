@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LandRepository {
-    List<Land> findAll();
+    List<Long> findAllLandsId();
     Optional<Land> findById(long id);
 }

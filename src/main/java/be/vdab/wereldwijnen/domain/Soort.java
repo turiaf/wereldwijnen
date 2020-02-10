@@ -10,8 +10,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "soorten")
-@NamedEntityGraph(name = "Soort.metLandEnWijnen",
-        attributeNodes = {@NamedAttributeNode("land"), @NamedAttributeNode("wijnen")})
 public class Soort {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,11 +43,15 @@ public class Soort {
     }
 
     public boolean addWijn(Wijn wijn) {
-        return wijnen.add(wijn);
-    }
-
-    public boolean removeWijn(Wijn wijn) {
-        return wijnen.remove(wijn);
+        boolean toegevoegd = wijnen.add(wijn);
+        Soort oudeSoort = wijn.getSoort();
+        if(oudeSoort != null && oudeSoort != this) {
+            oudeSoort.wijnen.remove(wijn);
+        }
+        if(oudeSoort != this) {
+            wijn.setSoort(this);
+        }
+        return toegevoegd;
     }
 
     public Set<Wijn> getWijnen() {
@@ -61,7 +63,7 @@ public class Soort {
     }
 
     public void setLand(Land land) {
-        if(!land.getSoorten().contains(this)) {
+        if (!land.getSoorten().contains(this)) {
             land.addSoort(this);
         }
         this.land = land;

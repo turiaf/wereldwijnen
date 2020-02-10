@@ -19,7 +19,7 @@ class MyControllerAdvice {
 
     @ModelAttribute
     void extraDataToevoegenAanModel(Model model) {
-        model.addAttribute("listLand", landService.findAll())
+        model.addAttribute("listLand", landService.findAllLandsId())
         .addAttribute(stateMandje);
     }
 }

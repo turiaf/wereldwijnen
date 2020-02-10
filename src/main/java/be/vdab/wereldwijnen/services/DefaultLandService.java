@@ -18,9 +18,14 @@ class DefaultLandService implements LandService {
         this.repository = repository;
     }
 
+//    @Override
+//    public List<Land> findAll() {
+//        return repository.findAll();
+//    }
+
     @Override
-    public List<Land> findAll() {
-        return repository.findAll();
+    public List<Long> findAllLandsId() {
+        return repository.findAllLandsId();
     }
 
     @Override

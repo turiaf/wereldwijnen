@@ -31,40 +31,25 @@
     </tr>
     </tbody>
 </table>
-
-<!--<form th:object="${bestelbon}" method="post" th:action="@{/mandje/bevestigen}">-->
-<!--    <label>Naam <span th:errors="*{naam}"></span>-->
-<!--        <input th:field="*{naam}" autofocus required></label>-->
-<!--    <label>Straat <span th:errors="*{straat}"></span>-->
-<!--        <input th:field="*{straat}" required></label>-->
-<!--    <label>Huisnummer <span th:errors="*{huisNr}"></span>-->
-<!--        <input th:field="*{huisNr}" required></label>-->
-<!--    <label>Postcode <span th:errors="*{postcode}"></span>-->
-<!--        <input th:field="*{postcode}" type="number" required min="1000" max="9999"></label>-->
-<!--    <label>Gemeente <span th:errors="*{gemeente}"></span>-->
-<!--        <input th:field="*{gemeente}" required></label>-->
-<!--    <input type="hidden" name="id" value="0">-->
-<!--    <button>Als bestelbon bevestigen</button>-->
-<!--</form>-->
-
-<form method="post" >
+<form th:object="${bestelbonForm}" method="post" th:action="@{/mandje/bevestigen}">
     <div class="inputClear">
-        <label>Naam <span ></span>
-            <input  autofocus required></label>
-        <label>Straat <span></span>
-            <input  required></label>
-        <label>Huisnummer <span ></span>
-            <input  required></label>
-        <label>Postcode <span ></span>
-            <input type="number" required min="1000" max="9999"></label>
-        <label>Gemeente<span></span>
-            <input  required></label>
+        <label>Naam <span th:errors="*{naam}"></span>
+            <input th:field="*{naam}" autofocus required></label>
+        <label>Straat <span th:errors="*{straat}"></span>
+            <input th:field="*{straat}" required></label>
+        <label>Huisnummer <span th:errors="*{huisNr}"></span>
+            <input th:field="*{huisNr}" required></label>
+        <label>Postcode <span th:errors="*{postCode}"></span>
+            <input th:field="*{postCode}"></label>
+        <label>Gemeente <span th:errors="*{gemeente}"></span>
+            <input th:field="*{gemeente}" required></label>
     </div>
-    <div class="zozo"><input type="radio" value="0" name="bo"><label>Afhalen</label></div>
-    <div class="zozo"><input type="radio" value="1" name="bo"><label>Opturen</label></div>
-    <input type="hidden" name="id" value="0">
+    <div class="zozo"><input type="radio" value="0" name="bestelwijze"><label>Afhalen
+        <span th:errors="*{bestelwijze}"></span></label></div>
+    <div class="zozo"><input type="radio" value="1" name="bestelwijze"><label>Opturen
+        <span th:errors="*{bestelwijze}"></span></label></div>
+<!--    <input type="hidden" name="id" value="0">-->
     <button>Als bestelbon bevestigen</button>
 </form>
-
 </body>
 </html>

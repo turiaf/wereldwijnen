@@ -9,9 +9,9 @@
     <div class="banner" th:style="'background-image:url(' + @{/images/intro.jpg} + ');'">
         <div><h1>Wereldwijnen</h1></div>
         <ul>
-            <li th:each="land:${listLand}" th:object="${land}">
-                <a th:href="@{/land/{id}(id= *{id})}">
-                    <img th:src="@{/images/{num}.png(num= *{id})}" th:alt="|land *{id}|"></a>
+            <li th:each="idLand:${listLand}">
+                <a th:href="@{/land/{id}(id= ${idLand})}">
+                    <img th:src="@{/images/{num}.png(num= ${idLand})}" th:alt="|land ${idLand}|"></a>
             </li>
         </ul>
         <div th:if="${stateMandje.gevuld}"><a th:href="@{/mandje}">

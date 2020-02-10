@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title= 'Werelwijnen')"></head>
+<body>
+<nav th:replace="fragments::menu"></nav>
+<h1 th:if="${param.toegevoegd} == null">Soory! Je mandje is niet bevestigd
+    <span th:text="${param.toegevoegd}"></span></h1>
+<h1 th:if="${param.toegevoegd} != null">Je mandje is bevestigd als bestelbon
+    <span th:text="${param.toegevoegd}"></span></h1>
+</body>
+</html>

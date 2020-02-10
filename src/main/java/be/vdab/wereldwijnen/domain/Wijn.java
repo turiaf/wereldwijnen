@@ -6,6 +6,11 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "wijnen")
+@NamedEntityGraph(name = Wijn.MET_SOORTENLAND,
+        attributeNodes = @NamedAttributeNode(value = "soort",
+        subgraph = "metLand"),
+        subgraphs = @NamedSubgraph(name = "metLand",
+                attributeNodes = @NamedAttributeNode("land")))
 public class Wijn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +22,9 @@ public class Wijn {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "soortid")
     private Soort soort;
+    @Version
     private long versie;
+    public static final String MET_SOORTENLAND = "Wijn.metSoortEnLand";
 
     protected Wijn() {
     }
@@ -53,6 +60,13 @@ public class Wijn {
         return soort;
     }
 
+    public void setSoort(Soort soort) {
+        if(!soort.getWijnen().contains(this)) {
+            soort.addWijn(this);
+        }
+        this.soort = soort;
+    }
+
     public void verhoogBestelling(int aantal) {
         if(aantal <= 0) {
             throw new IllegalArgumentException();
@@ -61,6 +75,9 @@ public class Wijn {
     }
 
     public BigDecimal teBetalen(int aantal) {
+        if(aantal <= 0) {
+            throw new IllegalArgumentException();
+        }
         return prijs.multiply(BigDecimal.valueOf(aantal));
     }
 
