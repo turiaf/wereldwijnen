@@ -12,7 +12,7 @@
     <named-query name="Wijn.findAllInList">
         <query>
             select w from Wijn w
-            where w.id in :idSet
+            where w.id in :idList
         </query>
     </named-query>
 </entity-mappings>

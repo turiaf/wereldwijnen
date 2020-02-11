@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
@@ -33,21 +32,34 @@ class DefaultBestelbonService implements BestelbonService {
     @Override
     @Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
     public long bestelbonBevestigen(Map<Long, Integer> wijnen, Bestelbon bestelbon) {
-
-
-
-        wijnen.entrySet().stream().forEach(entry -> {
-            Optional<Wijn> optionalWijn = wijnRepository.findById(entry.getKey());
-            if(optionalWijn.isPresent()) {
-                Wijn wijn = optionalWijn.get();
-                wijn.verhoogBestelling(entry.getValue());
-                bestelbon.addBonLijn(new Bestelbonlijn(entry.getValue(),
-                        wijn.teBetalen(entry.getValue()), wijn));
-            } else {
-                throw new WijnNietGevondenException();
-            }
-        });
+        List<Wijn> wijns = wijnRepository.findAllInListZonderSoort(new ArrayList<>(wijnen.keySet()));
+        if(wijns.size() == wijnen.size()) {
+            wijns.stream().forEach(wijn -> {
+                int aantal = wijnen.get(wijn.getId());
+                wijn.verhoogBestelling(aantal);
+                bestelbon.addBonLijn(new Bestelbonlijn(aantal, wijn.teBetalen(aantal), wijn));
+            });
+        } else {
+            throw new WijnNietGevondenException();
+        }
         repository.create(bestelbon);
         return bestelbon.getId();
+
+
+
+
+//        wijnen.entrySet().stream().forEach(entry -> {
+//            Optional<Wijn> optionalWijn = wijnRepository.findById(entry.getKey());
+//            if(optionalWijn.isPresent()) {
+//                Wijn wijn = optionalWijn.get();
+//                wijn.verhoogBestelling(entry.getValue());
+//                bestelbon.addBonLijn(new Bestelbonlijn(entry.getValue(),
+//                        wijn.teBetalen(entry.getValue()), wijn));
+//            } else {
+//                throw new WijnNietGevondenException();
+//            }
+//        });
+//        repository.create(bestelbon);
+//        return bestelbon.getId();
     }
 }

@@ -9,4 +9,5 @@ import java.util.Set;
 public interface WijnRepository {
     Optional<Wijn> findById(long id);
     List<Wijn> findAllInList(List<Long> idList);
+    List<Wijn> findAllInListZonderSoort(List<Long> idList);
 }

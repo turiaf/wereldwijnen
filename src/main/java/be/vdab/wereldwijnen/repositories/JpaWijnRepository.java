@@ -25,8 +25,15 @@ class JpaWijnRepository implements WijnRepository {
     @Override
     public List<Wijn> findAllInList(List<Long> idList) {
         return manager.createNamedQuery("Wijn.findAllInList", Wijn.class)
-                .setParameter("idSet", idList)
+                .setParameter("idList", idList)
                 .setHint("javax.persistence.loadgraph", manager.createEntityGraph(Wijn.MET_SOORTENLAND))
+                .getResultList();
+    }
+
+    @Override
+    public List<Wijn> findAllInListZonderSoort(List<Long> idList) {
+        return manager.createNamedQuery("Wijn.findAllInList", Wijn.class)
+                .setParameter("idList", idList)
                 .getResultList();
     }
 }
